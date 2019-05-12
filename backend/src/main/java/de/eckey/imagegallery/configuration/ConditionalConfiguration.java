@@ -1,6 +1,5 @@
 package de.eckey.imagegallery.configuration;
 
-import de.eckey.imagegallery.cache.CacheConfiguration;
 import de.eckey.imagegallery.cache.GlobalImageCache;
 import de.eckey.imagegallery.cache.StaticImageCache;
 import de.eckey.imagegallery.job.ReceiveImagesFromEMailJob;
@@ -14,7 +13,7 @@ import org.springframework.context.annotation.Profile;
 
 @Configuration
 public class ConditionalConfiguration {
-    Logger logger = LoggerFactory.getLogger(CacheConfiguration.class);
+    Logger logger = LoggerFactory.getLogger(ConditionalConfiguration.class);
 
     @Bean
     @Profile("staticImageCache")

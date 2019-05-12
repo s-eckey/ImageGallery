@@ -12,4 +12,5 @@ public interface ImageCache {
     void addImages(Collection<Image> images);
 
     Optional<Image> getNext();
+
 }

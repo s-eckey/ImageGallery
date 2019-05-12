@@ -1,4 +1,4 @@
-package de.eckey.imagegallery.email;
+package de.eckey.imagegallery.property;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
