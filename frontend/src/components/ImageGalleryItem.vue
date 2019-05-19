@@ -5,7 +5,7 @@
         class="image"
         v-if="show"
         :src="img"
-        alt="Bilder per Mail an aileensheirat@gmail.com senden!"
+        alt="Bilder per Mail an meinehochzeit@gmail.com senden!"
       >
     </transition>
   </div>
