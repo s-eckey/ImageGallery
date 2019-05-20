@@ -1,12 +1,7 @@
 <template>
   <div id="imageGalleryItem" class="imageGalleryItem">
     <transition name="fade">
-      <img
-        class="image"
-        v-if="show"
-        :src="img"
-        alt="Bilder per Mail an meinehochzeit@gmail.com senden!"
-      >
+      <img class="image" v-if="show" :src="img">
     </transition>
   </div>
 </template>
@@ -14,6 +9,7 @@
 <script>
 import axios from "axios";
 import { setTimeout } from "timers";
+const uuidv1 = require("uuid/v1");
 
 export default {
   name: "imageGalleryItem",
@@ -25,23 +21,18 @@ export default {
   },
   created() {
     this.loadNextImage();
-    axios
-      .get(`rest/configuration/viewTime?timestamp=${new Date().getTime()}`)
-      .then(resp => {
-        if (resp.data) {
-          let viewTime = resp.data;
-          setInterval(() => {
-            this.loadNextImage();
-          }, viewTime);
-        }
-      })
-      .catch(err => {
-        alert("Backend can not be reached");
-      });
+    axios.get(`rest/configuration/viewTime?uuid=${uuidv1()}`).then(resp => {
+      if (resp.data) {
+        let viewTime = resp.data;
+        setInterval(() => {
+          this.loadNextImage();
+        }, viewTime);
+      }
+    });
   },
   methods: {
     loadNextImage: function() {
-      axios.get("rest/image/next").then(resp => {
+      axios.get(`rest/image/next?uuid=${uuidv1()}`).then(resp => {
         if (resp.data) {
           this.$data.show = false;
           this.$data.img =
@@ -71,7 +62,8 @@ export default {
 .fade-leave-active {
   transition: opacity 1s;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }
 </style>

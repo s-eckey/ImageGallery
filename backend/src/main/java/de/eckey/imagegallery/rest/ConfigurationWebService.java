@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Random;
-
 @RestController()
 @RequestMapping("rest/configuration")
 public class ConfigurationWebService {
@@ -18,11 +16,9 @@ public class ConfigurationWebService {
     @Autowired
     private ApplicationProperties applicationProperties;
 
-    private final Random random = new Random();
-
     @GetMapping("/viewTime")
     public int getViewTime() {
-        final int viewTime = random.nextInt(applicationProperties.getViewTime());
+        final int viewTime = applicationProperties.getViewTime();
         logger.debug("generated view time: {}", viewTime);
         return viewTime;
     }
